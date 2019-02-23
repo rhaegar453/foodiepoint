@@ -34,7 +34,8 @@ const apiReducer = (state = initialState, action) => {
     case actions.ADD_TO_FAVORITES:
       return {
         ...state,
-        favorites: [...state.favorites, action.payload]
+        favorites: [...state.favorites, action.payload],
+        recipes:state.recipes.filter(item=>item.title!=action.payload.title)
       };
     
     case actions.REMOVE_FROM_FAVORITES:

@@ -33,7 +33,8 @@ class CustomCard extends React.Component {
   saveAsFavorite=()=>{
       let item={
           title:this.props.title,
-          link:this.props.link
+          link:this.props.link,
+          image:this.props.image
       }
       this.props.makeFavorite(item)
   }

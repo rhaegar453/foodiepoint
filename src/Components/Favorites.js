@@ -1,47 +1,45 @@
-import React from "react";
+import React, { Component } from "react";
+import { Item } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { removeFavorite } from "./../Store/Actions/apiActions";
-import { List, Segment, Grid, Button } from "semantic-ui-react";
+import { removeFavorite } from "../Store/Actions/apiActions";
 
 class Favorites extends React.Component {
   constructor(props) {
     super(props);
+    this.state={
+        favorites:[
+            {
+                title:'Shivaraj Bakale',
+                link:'hello world',
+                image:'image'
+            }
+            ,
+            {
+                title:'Sachin Bakale',
+                link:'hello world from sachin',
+                image:'image'
+            }
+        ]
+    }
   }
 
-  removeFavorite=()=>{
-      console.log("Removing favorite");
-      this.props.removeFavorite({})
-  }
   render() {
     return (
-      <div style={{ marginTop: "60px", marginLeft: "80px" }}>
-        <h1>
-          <u>Favorites</u>
-        </h1>
-        <Grid>
-            {this.props.favorites.length==0?null:
-          <Grid.Row>
-          <Grid.Column width={6} floated="left">
-            <Segment inverted>
-              <List divided inverted relaxed> 
-                {this.props.favorites.map(item => (
-                  <List.Item>
-                    <List.Content>
-                      <List.Header>
-                          <div style={{display:'flex', justifyContent:'space-between'}}>
-                          {item.title}
-                            <Button color="twitter" onClick={this.removeFavorite}>Remove</Button>
-                          </div></List.Header>
-                    </List.Content>
-                    <a href={item.link}>Link</a>
-                  </List.Item>
-                ))}
-              </List>
-            </Segment>
-            
-          </Grid.Column>
-        </Grid.Row>}
-        </Grid>
+      <div style={{marginTop:'60px', marginLeft:'100px'}}> 
+      <h1><u>Favorites</u></h1>
+        <Item.Group>
+            {this.props.favorites.map(item=>(
+                <Item>
+                    <Item.Image size="small" src={item.image}/>
+                    <Item.Content>
+                        <Item.Header as="a">{item.title}</Item.Header>
+                        <Item.Description>
+                            <a href={item.link}>{item.link}</a>
+                        </Item.Description>
+                    </Item.Content>
+                </Item>
+            ))}
+        </Item.Group>
       </div>
     );
   }
@@ -52,7 +50,6 @@ const mapStateToProps = state => {
     favorites: state.api.favorites
   };
 };
-
 const mapDispatchToProps = dispatch => {
   return {
     removeFavorite: item => dispatch(removeFavorite(item))
