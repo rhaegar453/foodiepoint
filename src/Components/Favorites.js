@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Item } from "semantic-ui-react";
+import { Item, Button } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { removeFavorite } from "../Store/Actions/apiActions";
 
@@ -36,6 +36,7 @@ class Favorites extends React.Component {
                         <Item.Description>
                             <a href={item.link}>{item.link}</a>
                         </Item.Description>
+                        <Button size="small"  color="red" icon="minus" onClick={()=>this.props.removeFavorite(item)} style={{borderRadius:"10px", marginTop:"10px"}}>Remove</Button>
                     </Item.Content>
                 </Item>
             ))}
